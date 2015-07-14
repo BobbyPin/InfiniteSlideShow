@@ -35,9 +35,7 @@
 {
     [super viewDidLoad];
     
-    dataArray = @[@"http://images.nationalgeographic.com/wpf/media-live/photos/000/064/cache/great-white-breaching_6450_600x450.jpg",
-                @"http://www.sane.org.uk/uploads/great_wall_of_china.jpg",
-                @"http://www.walldesk.net/pdp/1024/13/02/Great-Voyage.jpg"];
+    dataArray = @[@"crank", @"humble", @"thepit"];
     
     // Default Slideshow
 
@@ -81,10 +79,7 @@
 
 - (void)mytimeout {
     NSLog(@"timeout");
-    dataArray = @[@"http://images.nationalgeographic.com/wpf/media-live/photos/000/064/cache/great-white-breaching_6450_600x450.jpg",
-                  @"http://www.sane.org.uk/uploads/great_wall_of_china.jpg",
-                  @"http://www.walldesk.net/pdp/1024/13/02/Great-Voyage.jpg",
-                  @"http://phonecms.wiaapp.cn/wp-content/uploads/2014/10/vpn.jpeg"];
+    dataArray = @[@"crank", @"humble", @"thepit", @"jose"];
     [slideShow reload];
     [slideShowWithCustomControl reload];
 }
@@ -103,9 +98,9 @@
 }
 
 #pragma mark InfiniteSlideshow Datasource
-- (NSArray *)loadSlideShowItems
+- (NSArray *)loadSlideShowItems:(BOOL*)areImageHandles
 {
-    NSLog(@"Loading slide show items.");
+    *areImageHandles = YES;
     return [dataArray copy];
 }
 

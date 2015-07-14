@@ -23,6 +23,7 @@
     NSMutableArray *imageViews;
     float timerDuration;
     float animationDuration;
+    BOOL areImageHandles;
 }
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -55,7 +56,8 @@
                 animationDuration:(NSNumber *)slideAnimationDuration
                 customPageControl:(CustomPageControl *)slidePageControl
 {
-    dataArray = [self.dataSource loadSlideShowItems];
+    areImageHandles = NO;
+    dataArray = [self.dataSource loadSlideShowItems:&areImageHandles];
 
     totalElements = [dataArray count];
     imageViews = [[NSMutableArray alloc] init];
@@ -111,7 +113,8 @@
 
     [imageViews removeAllObjects];
 
-    dataArray = [self.dataSource loadSlideShowItems];
+    dataArray = [self.dataSource loadSlideShowItems:&areImageHandles];
+    
     totalElements = [dataArray count];
 
     [self.pageControl setNumberOfPages: totalElements] ;
@@ -237,7 +240,11 @@
         }
 
         imageView = (UIImageView *)imageViews[i];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
+        if(areImageHandles){
+            imageView.image = [UIImage imageNamed:imageUrl];
+        } else {
+            [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
+        }
     }
 }
 
