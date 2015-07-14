@@ -56,12 +56,12 @@
                 customPageControl:(CustomPageControl *)slidePageControl
 {
     dataArray = [self.dataSource loadSlideShowItems];
-    
+
     totalElements = [dataArray count];
     imageViews = [[NSMutableArray alloc] init];
     timerDuration = [slideTimerDuration floatValue] == 0 ? TIMER_DURATION : [slideTimerDuration floatValue];
     animationDuration = [slideAnimationDuration floatValue] == 0 ? ANIMATION_DURATION : [slideAnimationDuration floatValue];
-    
+
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     [self.scrollView setDelegate:self];
     [self.scrollView setAutoresizesSubviews:UIViewAutoresizingNone];
@@ -69,7 +69,7 @@
     [self.scrollView setUserInteractionEnabled:YES];
     [self setUpScrollView];
     [self addSubview:self.scrollView];
-    
+
     currentPage = 0;
 
     // Setting up custom page control
@@ -88,11 +88,11 @@
     {
         self.pageControl = slidePageControl;
     }
-    
+
     [self.pageControl setCenter: CGPointMake(self.center.x, self.frame.size.height - 20)];
     [self addSubview:self.pageControl];
     [self addGestureRecognizers];
-    
+
     // Setting up TimeInterval
     timer = [NSTimer scheduledTimerWithTimeInterval:timerDuration
                                              target:self
@@ -104,20 +104,20 @@
 - (void) reload
 {
     [self killTimer];
-    
+
     animationInProcess = FALSE;
-    
+
     currentPage = 0;
-    
+
     [imageViews removeAllObjects];
 
     dataArray = [self.dataSource loadSlideShowItems];
     totalElements = [dataArray count];
-    
+
     [self.pageControl setNumberOfPages: totalElements] ;
     [self.pageControl setCurrentPage: 0];
     [self setUpScrollView];
-    
+
     timer = [NSTimer scheduledTimerWithTimeInterval:timerDuration
                                              target:self
                                            selector:@selector(scrollingTimerWithDirectionRight)
@@ -151,7 +151,7 @@
     [self addGestureRecognizer:leftSwipe];
     leftSwipe.delegate = self;
     leftSwipe.numberOfTouchesRequired = 1;
-    
+
     // Adding right swipe
     UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(handleRightSwipe:)];
@@ -191,20 +191,20 @@
         [self.scrollView addSubview:imageView];
     }
 
-    
+
     // Adding the first element as last element for smoother scrolling.
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake( (totalElements + 1)*self.scrollView.frame.size.width, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
     [imageView setTag:totalElements + 1];
     [imageViews addObject:imageView];
     [self.scrollView addSubview:imageView];
-    
-    
+
+
     [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width*(totalElements + 2), self.scrollView.frame.size.height)];
     [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width,0,self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:NO];
-    
+
     [self addTapGestureRecognizer];
     [self setImages];
-    
+
 }
 
 - (void)addTapGestureRecognizer
@@ -235,7 +235,7 @@
         {
             imageUrl = dataArray[i-1];
         }
-        
+
         imageView = (UIImageView *)imageViews[i];
         [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
     }
@@ -247,7 +247,7 @@
     {
         return;
     }
-    
+
     animationInProcess = TRUE;
     currentPage--;
 	if (currentPage == -1)
@@ -255,16 +255,16 @@
         currentPage = totalElements - 1;
 		[self.scrollView scrollRectToVisible:CGRectMake((currentPage + 2) * self.scrollView.frame.size.width,0, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:NO];
 	}
-    
+
     self.pageControl.currentPage = currentPage;
-    
+
     [UIView animateWithDuration:animationDuration animations:^{
         [self.scrollView setContentOffset:CGPointMake((currentPage + 1)*self.scrollView.frame.size.width, 0)];
     }
     completion:^(BOOL finished){
         animationInProcess = FALSE;
     }];
-    
+
 }
 
 - (void)scrollingTimerWithDirectionRight
@@ -273,10 +273,10 @@
     {
         return;
     }
-    
+
     animationInProcess = TRUE;
     currentPage++;
-        
+
     if (currentPage == totalElements)
     {
         currentPage = 0;
@@ -284,14 +284,14 @@
 	}
 
     self.pageControl.currentPage = currentPage;
-    
+
     [UIView animateWithDuration:animationDuration animations:^{
         [self.scrollView setContentOffset:CGPointMake((currentPage + 1)*self.scrollView.frame.size.width, 0)];
     }
     completion:^(BOOL finished){
         animationInProcess = FALSE;
     }];
-    
+
 }
 
 - (void)tapDetected:(UITapGestureRecognizer *)sender
