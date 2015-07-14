@@ -1,23 +1,19 @@
 PODS:
-  - InfiniteSlideShow (0.1):
-    - SDWebImage (~> 3.5.4)
-  - SDWebImage (HEAD based on 3.5.4):
-    - SDWebImage/Core
-  - SDWebImage (HEAD based on 3.7.1):
-    - SDWebImage/Core
-  - SDWebImage/Core (HEAD based on 3.5.4)
-  - SDWebImage/Core (HEAD based on 3.7.1)
+  - InfiniteSlideShow (0.2):
+    - SDWebImage (~> 3.7.3)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
 
 DEPENDENCIES:
   - InfiniteSlideShow (from `../`)
-  - SDWebImage (HEAD)
 
 EXTERNAL SOURCES:
   InfiniteSlideShow:
     :path: ../
 
 SPEC CHECKSUMS:
-  InfiniteSlideShow: 56ae9853c241d2434081fabeb09c7bfd1be9ca6d
-  SDWebImage: 571295c8acbb699505a0f68e54506147c3de9ea7
+  InfiniteSlideShow: e5eb8aeb041f235e79bd2231f91900495b7dacab
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
 
-COCOAPODS: 0.34.4
+COCOAPODS: 0.35.0

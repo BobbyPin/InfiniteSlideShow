@@ -1,12 +1,8 @@
 inhibit_all_warnings!
 
-pod "SDWebImage", :head
-
 target "Example", exclusive: true do
   xcodeproj 'Example.xcodeproj'
   workspace 'Example.xcworkspace'
   pod "InfiniteSlideShow", path: "../"
 end
-
-
 
