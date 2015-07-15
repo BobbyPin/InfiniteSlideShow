@@ -42,9 +42,7 @@
     slideShow = [[InfiniteSlideShow alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
     slideShow.dataSource = self;
     slideShow.delegate = self;
-    [slideShow setUpViewWithTimerDuration:nil
-                             animationDuration:nil
-                             customPageControl:nil];
+    [slideShow setUpViewWithCustomPageControl:nil];
     [self.view addSubview:slideShow];
 
     
@@ -61,8 +59,6 @@
     [pageControl setOffImage:[UIImage imageNamed:@"dot_off"]];
     [pageControl setIndicatorDiameter: 10.0f];
     [pageControl setIndicatorSpace:7.0f];
-    [slideShowWithCustomControl setBackgroundColor:[UIColor redColor]];
-    
     [slideShowWithCustomControl setUpViewWithTimerDuration:[NSNumber numberWithFloat:5.0]
                                          animationDuration:[NSNumber numberWithFloat:0.2]
                                          customPageControl:pageControl];
