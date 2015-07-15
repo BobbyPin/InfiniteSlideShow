@@ -19,6 +19,8 @@
 @property (nonatomic, weak) id<InfiniteSlideShowDatasource> dataSource;
 @property (nonatomic, weak) id<InfiniteSlideShowDelegate> delegate;
 
+-(void)setUpViewWithCustomPageControl:(CustomPageControl *)pageControl;
+
 -(void)setUpViewWithTimerDuration:(NSNumber *)timerDuration
                 animationDuration:(NSNumber *)animationDuration
                 customPageControl:(CustomPageControl *)pageControl;

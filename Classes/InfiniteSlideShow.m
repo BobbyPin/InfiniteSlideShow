@@ -12,6 +12,7 @@
 
 #define ANIMATION_DURATION 0.5
 #define TIMER_DURATION 3.0
+#define NO_AUTO_SCROLL_TIMER_DURATION -1.f
 
 @interface InfiniteSlideShow()
 {
@@ -52,6 +53,11 @@
     return self;
 }
 
+
+-(void)setUpViewWithCustomPageControl:(CustomPageControl *)pageControl {
+    [self setUpViewWithTimerDuration:nil animationDuration:nil customPageControl:pageControl];
+}
+
 -(void)setUpViewWithTimerDuration:(NSNumber *)slideTimerDuration
                 animationDuration:(NSNumber *)slideAnimationDuration
                 customPageControl:(CustomPageControl *)slidePageControl
@@ -61,8 +67,14 @@
 
     totalElements = [dataArray count];
     imageViews = [[NSMutableArray alloc] init];
-    timerDuration = [slideTimerDuration floatValue] == 0 ? TIMER_DURATION : [slideTimerDuration floatValue];
-    animationDuration = [slideAnimationDuration floatValue] == 0 ? ANIMATION_DURATION : [slideAnimationDuration floatValue];
+    
+    if(slideTimerDuration != nil) {
+        timerDuration = [slideTimerDuration floatValue] == 0 ? TIMER_DURATION : [slideTimerDuration floatValue];
+        animationDuration = [slideAnimationDuration floatValue] == 0 ? ANIMATION_DURATION : [slideAnimationDuration floatValue];
+    } else {
+        timerDuration = NO_AUTO_SCROLL_TIMER_DURATION;
+        animationDuration = ANIMATION_DURATION;
+    }
 
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     [self.scrollView setDelegate:self];
@@ -96,11 +108,13 @@
     [self addGestureRecognizers];
 
     // Setting up TimeInterval
-    timer = [NSTimer scheduledTimerWithTimeInterval:timerDuration
-                                             target:self
-                                           selector:@selector(scrollingTimerWithDirectionRight)
-                                           userInfo:nil
-                                            repeats:YES];
+    if(timerDuration != NO_AUTO_SCROLL_TIMER_DURATION) {
+        timer = [NSTimer scheduledTimerWithTimeInterval:timerDuration
+                                                 target:self
+                                               selector:@selector(scrollingTimerWithDirectionRight)
+                                               userInfo:nil
+                                                repeats:YES];
+    }
 }
 
 - (void) reload
@@ -121,11 +135,13 @@
     [self.pageControl setCurrentPage: 0];
     [self setUpScrollView];
 
-    timer = [NSTimer scheduledTimerWithTimeInterval:timerDuration
-                                             target:self
-                                           selector:@selector(scrollingTimerWithDirectionRight)
-                                           userInfo:nil
-                                            repeats:YES];
+    if(timerDuration != NO_AUTO_SCROLL_TIMER_DURATION) {
+        timer = [NSTimer scheduledTimerWithTimeInterval:timerDuration
+                                                 target:self
+                                               selector:@selector(scrollingTimerWithDirectionRight)
+                                               userInfo:nil
+                                                repeats:YES];
+    }
 }
 
 
@@ -138,11 +154,13 @@
 - (void)resetSlideShowTimer
 {
     [self killTimer];
-    timer = [NSTimer scheduledTimerWithTimeInterval:timerDuration
-                                             target:self
-                                           selector:@selector(scrollingTimerWithDirectionRight)
-                                           userInfo:nil
-                                            repeats:YES];
+    if(timerDuration != NO_AUTO_SCROLL_TIMER_DURATION) {
+        timer = [NSTimer scheduledTimerWithTimeInterval:timerDuration
+                                                 target:self
+                                               selector:@selector(scrollingTimerWithDirectionRight)
+                                               userInfo:nil
+                                                repeats:YES];
+    }
 }
 
 - (void)addGestureRecognizers
