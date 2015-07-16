@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol InfiniteSlideShowDelegate <NSObject>
-- (void)slideWillChange:(NSInteger)slideIndex;
+- (void)slideWillChange:(NSInteger)newSlideIndex;
+- (void)slideDidChange:(NSInteger)newSlideIndex;
 - (void)didClickSlideShowItem:(id)sender;
 @end

@@ -292,6 +292,9 @@
         }
         completion:^(BOOL finished) {
           animationInProcess = FALSE;
+          if ([self.delegate respondsToSelector:@selector(slideDidChange:)]) {
+              [self.delegate slideDidChange:currentPage];
+          }
         }];
 }
 
@@ -328,6 +331,9 @@
         }
         completion:^(BOOL finished) {
           animationInProcess = FALSE;
+          if ([self.delegate respondsToSelector:@selector(slideDidChange:)]) {
+              [self.delegate slideDidChange:currentPage];
+          }
         }];
 }
 
