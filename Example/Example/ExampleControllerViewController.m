@@ -87,8 +87,8 @@
     NSLog(@"Did click slide show item");
 }
 
--(void)onSlideChange:(NSInteger)slideIndex {
-    NSLog(@"Slide change: %ld", slideIndex);
+- (void)slideWillChange:(NSInteger)slideIndex {
+    NSLog(@"Slide will change to: %ld", slideIndex);
 }
 
 #pragma mark InfiniteSlideshow Datasource

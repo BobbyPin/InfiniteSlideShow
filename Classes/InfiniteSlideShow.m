@@ -271,19 +271,19 @@
 
     self.pageControl.currentPage = currentPage;
 
+    if ([self.delegate respondsToSelector:@selector(slideWillChange:)]) {
+        [self.delegate slideWillChange:currentPage];
+    }
+
     [UIView animateWithDuration:animationDuration
         animations:^{
           [self.scrollView
               setContentOffset:CGPointMake((currentPage + 1) * self.scrollView.frame.size.width,
                                            0)];
         }
-    completion:^(BOOL finished){
-        animationInProcess = FALSE;
-
-        if([self.delegate respondsToSelector:@selector(onSlideChange:)]) {
-            [self.delegate onSlideChange:currentPage];
-        }
-    }];
+        completion:^(BOOL finished) {
+          animationInProcess = FALSE;
+        }];
 }
 
 - (void)scrollingTimerWithDirectionRight {
@@ -303,19 +303,19 @@
 
     self.pageControl.currentPage = currentPage;
 
+    if ([self.delegate respondsToSelector:@selector(slideWillChange:)]) {
+        [self.delegate slideWillChange:currentPage];
+    }
+
     [UIView animateWithDuration:animationDuration
         animations:^{
           [self.scrollView
               setContentOffset:CGPointMake((currentPage + 1) * self.scrollView.frame.size.width,
                                            0)];
         }
-    completion:^(BOOL finished){
-        animationInProcess = FALSE;
-
-        if([self.delegate respondsToSelector:@selector(onSlideChange:)]) {
-            [self.delegate onSlideChange:currentPage];
-        }
-    }];
+        completion:^(BOOL finished) {
+          animationInProcess = FALSE;
+        }];
 }
 
 - (void)tapDetected:(UITapGestureRecognizer *)sender {
