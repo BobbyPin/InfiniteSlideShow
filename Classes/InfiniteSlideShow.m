@@ -277,9 +277,13 @@
               setContentOffset:CGPointMake((currentPage + 1) * self.scrollView.frame.size.width,
                                            0)];
         }
-        completion:^(BOOL finished) {
-          animationInProcess = FALSE;
-        }];
+    completion:^(BOOL finished){
+        animationInProcess = FALSE;
+
+        if([self.delegate respondsToSelector:@selector(onSlideChange:)]) {
+            [self.delegate onSlideChange:currentPage];
+        }
+    }];
 }
 
 - (void)scrollingTimerWithDirectionRight {
@@ -305,13 +309,16 @@
               setContentOffset:CGPointMake((currentPage + 1) * self.scrollView.frame.size.width,
                                            0)];
         }
-        completion:^(BOOL finished) {
-          animationInProcess = FALSE;
-        }];
+    completion:^(BOOL finished){
+        animationInProcess = FALSE;
+
+        if([self.delegate respondsToSelector:@selector(onSlideChange:)]) {
+            [self.delegate onSlideChange:currentPage];
+        }
+    }];
 }
 
 - (void)tapDetected:(UITapGestureRecognizer *)sender {
-    NSLog(@"Hey you just tapped an image");
     UIImageView *imageView = (UIImageView *)sender.view;
     NSInteger tag = imageView.tag;
     if (tag == 0) {
