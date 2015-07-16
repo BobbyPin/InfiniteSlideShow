@@ -87,6 +87,10 @@
     NSLog(@"Did click slide show item");
 }
 
+-(void)onSlideChange:(NSInteger)slideIndex {
+    NSLog(@"Slide change: %ld", slideIndex);
+}
+
 #pragma mark InfiniteSlideshow Datasource
 - (NSArray *)loadSlideShowItems:(BOOL *)areImageHandles {
     *areImageHandles = YES;
