@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @protocol InfiniteSlideShowDatasource <NSObject>
-- (NSArray *)loadSlideShowItems:(BOOL*)areImageHandles;
+- (NSArray *)loadSlideShowItems:(BOOL *)areImageHandles;
 @end

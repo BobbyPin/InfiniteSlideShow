@@ -11,24 +11,21 @@
 #import "InfiniteSlideShowDelegate.h"
 #import "CustomPageControl.h"
 
-@interface InfiniteSlideShow : UIView<
-                                    UIScrollViewDelegate,
-                                    UIGestureRecognizerDelegate
-                                    >
+@interface InfiniteSlideShow : UIView <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) id<InfiniteSlideShowDatasource> dataSource;
 @property (nonatomic, weak) id<InfiniteSlideShowDelegate> delegate;
 
--(void)setUpViewWithCustomPageControl:(CustomPageControl *)pageControl;
+- (void)setUpViewWithCustomPageControl:(CustomPageControl *)pageControl;
 
--(void)setUpViewWithTimerDuration:(NSNumber *)timerDuration
-                animationDuration:(NSNumber *)animationDuration
-                customPageControl:(CustomPageControl *)pageControl;
+- (void)setUpViewWithTimerDuration:(NSNumber *)timerDuration
+                 animationDuration:(NSNumber *)animationDuration
+                 customPageControl:(CustomPageControl *)pageControl;
 
--(void)killTimer;
+- (void)killTimer;
 
--(void)reload;
+- (void)reload;
 
--(void)resetSlideShowTimer;
+- (void)resetSlideShowTimer;
 
 @end

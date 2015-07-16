@@ -10,9 +10,7 @@
 #import "InfiniteSlideShowDatasource.h"
 #import "InfiniteSlideShowDelegate.h"
 
-@interface ExampleControllerViewController : UIViewController<
-                                                            InfiniteSlideShowDatasource,
-                                                            InfiniteSlideShowDelegate
-                                                            >
+@interface ExampleControllerViewController
+    : UIViewController <InfiniteSlideShowDatasource, InfiniteSlideShowDelegate>
 
 @end
