@@ -24,6 +24,7 @@
     float timerDuration;
     float animationDuration;
     BOOL areImageHandles;
+    BOOL isWrapAroundDisabled;
 }
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -45,7 +46,7 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        isWrapAroundDisabled = NO;
     }
     return self;
 }
@@ -111,6 +112,10 @@
                                                userInfo:nil
                                                 repeats:YES];
     }
+}
+
+- (void)disableWrapAround {
+    isWrapAroundDisabled = YES;
 }
 
 - (void)reload {
@@ -258,6 +263,10 @@
         return;
     }
 
+    if (isWrapAroundDisabled && currentPage == 0) {
+        return;
+    }
+
     animationInProcess = TRUE;
     currentPage--;
     if (currentPage == -1) {
@@ -288,6 +297,10 @@
 
 - (void)scrollingTimerWithDirectionRight {
     if (animationInProcess) {
+        return;
+    }
+
+    if (isWrapAroundDisabled && currentPage == totalElements - 1) {
         return;
     }
 

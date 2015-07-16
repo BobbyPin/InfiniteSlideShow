@@ -23,9 +23,8 @@
                  customPageControl:(CustomPageControl *)pageControl;
 
 - (void)killTimer;
-
 - (void)reload;
-
 - (void)resetSlideShowTimer;
+- (void)disableWrapAround;
 
 @end

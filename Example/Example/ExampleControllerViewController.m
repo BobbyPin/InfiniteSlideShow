@@ -40,6 +40,7 @@
         [[InfiniteSlideShow alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
     slideShow.dataSource = self;
     slideShow.delegate = self;
+    [slideShow disableWrapAround];
     [slideShow setUpViewWithCustomPageControl:nil];
     [self.view addSubview:slideShow];
 
